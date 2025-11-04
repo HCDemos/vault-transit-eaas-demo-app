@@ -24,7 +24,7 @@ ssn_cipher TEXT
 Plaintext values are **never stored**—only encrypted data.
 
 ## 🔐 Vault Setup
-1. Start Vault (in dev mode for testing):
+1. Start Vault (in dev mode for testing) or use an HCP Vault instance for easy repeatability:
    ```bash
    vault server -dev -dev-root-token-id=root
    ```
@@ -37,13 +37,15 @@ Plaintext values are **never stored**—only encrypted data.
    ```
 
 ## ⚙️ Configuration
-Set these environment variables before running:
+Set these environment variables before running - change values as needed:
 ```bash
 export VAULT_ADDR=http://127.0.0.1:8200
 export VAULT_TOKEN=root               # or scoped token with transit perms
-export VAULT_NAMESPACE=admin
+export VAULT_NAMESPACE=admin          # needed for HCP Vault
 export VAULT_TRANSIT_KEY=customer-data
-export FLASK_SECRET_KEY=dev-secret
+export FLASK_SECRET_KEY=<your_flask_secret>
+export ALICE_PASSWORD=<set_alice_password>
+export BOB_PASSWORD=<set_bob_password>
 ```
 
 ## ▶️ Run the App
@@ -54,10 +56,10 @@ python vault_transit_demo_app_batch.py
 Then visit [http://localhost:5001](http://localhost:5001).
 
 ## 🧰 Demo Users (local for demo only - these users do not interact with Vault directly)
-| Username | Password  |
-|-----------|------------|
-| alice     | password1  |
-| bob       | password2  |
+| Username  |   Password   |
+|-----------|--------------|
+| alice     | <set-in-env> |
+| bob       | <set-in-env> |
 
 ## 🔎 Vault Permissions Required
 The Vault token must have capabilities for:
