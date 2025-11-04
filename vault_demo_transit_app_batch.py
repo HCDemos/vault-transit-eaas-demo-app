@@ -42,6 +42,10 @@ Security notes (for real apps)
 - Do NOT store plaintext SSNs; this demo never persists plaintext, only ciphertext
 """
 
+# Vault Transit Demo App (Batch)
+
+# ... [existing documentation above unchanged] ...
+
 from __future__ import annotations
 import base64
 import os
@@ -60,10 +64,14 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("FLASK_SECRET_KEY", "change-me")
 DB_PATH = os.path.join(os.path.dirname(__file__), "customers.db")
 
-# Demo users (username -> password). In production, use hashed passwords + DB/IdP
+# Demo users (username -> password) loaded from environment variables.
+# Example usage:
+#   export ALICE_PASSWORD="alicepass"
+#   export BOB_PASSWORD="bobpass"
+# If not set, defaults to placeholder values.
 USERS = {
-    "alice": "password1",
-    "bob": "password2",
+    "alice": os.environ.get("ALICE_PASSWORD", "<set_ALICE_PASSWORD_env>"),
+    "bob": os.environ.get("BOB_PASSWORD", "<set_BOB_PASSWORD_env>"),
 }
 
 # -------------------- Vault client helpers --------------------
@@ -76,7 +84,6 @@ if not VAULT_ADDR or not VAULT_TOKEN:
     print("[WARN] VAULT_ADDR/VAULT_TOKEN not set. Set env vars before running.")
 
 client = hvac.Client(url=VAULT_ADDR, token=VAULT_TOKEN, namespace=VAULT_NAMESPACE)
-
 
 def transit_encrypt(plaintext: str) -> str:
     if plaintext is None:
