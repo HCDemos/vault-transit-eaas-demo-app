@@ -53,7 +53,7 @@ python vault_transit_demo_app_batch.py
 ```
 Then visit [http://localhost:5001](http://localhost:5001).
 
-## 🧰 Demo Users
+## 🧰 Demo Users (local for demo only - these users do not interact with Vault directly)
 | Username | Password  |
 |-----------|------------|
 | alice     | password1  |
