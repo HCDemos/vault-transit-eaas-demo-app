@@ -1,6 +1,6 @@
 # Vault Transit Demo App (Batch) & Seed Customers App (see below)
 
-This Flask-based web application demonstrates **HashiCorp Vault Transit** encryption and rewrap operations, with timing metrics for each operation. It supports both individual and batch modes for encrypting, decrypting, and rewrapping sensitive customer data.  Both of these apps vibe coded with ChatGPT.
+This Flask-based web application demonstrates **HashiCorp Vault Transit** encryption and rewrap operations, with timing metrics for each operation. It supports both individual and batch modes for encrypting, decrypting, and rewrapping sensitive customer data.  
 
 ## 🚀 Features
 - **Login page** for two demo users (`alice` / `bob`)
