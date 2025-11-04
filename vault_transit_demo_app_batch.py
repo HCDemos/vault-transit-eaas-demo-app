@@ -44,8 +44,6 @@ Security notes (for real apps)
 
 # Vault Transit Demo App (Batch)
 
-# ... [existing documentation above unchanged] ...
-
 from __future__ import annotations
 import base64
 import os
