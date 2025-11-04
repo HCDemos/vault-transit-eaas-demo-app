@@ -462,39 +462,35 @@ def cleartext_batch():
 BASE_CSS = """
 <style>
   body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 2rem; }
-  .nav a { margin-right: 1rem; }
   .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem 1.25rem; margin: 1rem 0; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
-  input, button, textarea { padding: .6rem .8rem; border: 1px solid #cbd5e1; border-radius: 10px; width: 100%; }
+  input, button, textarea { padding: .6rem .8rem; border: 1px solid #cbd5e1; border-radius: 10px; }
   label { font-weight: 600; margin-top: .6rem; display: block; }
   form { max-width: 520px; }
   table { width: 100%; border-collapse: collapse; }
   th, td { text-align: left; padding: .5rem .6rem; border-bottom: 1px solid #eee; font-size: 0.95rem; }
   .flash { padding: .6rem .8rem; border-radius: 8px; margin-bottom: 1rem; }
   .success { background: #ecfdf5; color: #065f46; }
-  .danger { background: #fef2f2; color: #991b1b; }
+  .danger  { background: #fef2f2; color: #991b1b; }
   .warning { background: #fff7ed; color: #9a3412; }
-  .info { background: #eff6ff; color: #1e40af; }
-  /* Ensure nav buttons are visible & compact */
-  .nav { margin-bottom: 1rem; }
-  .nav form { display: inline; }
-  .nav button { width: auto; display: inline-block; }
-  /* Optional prominent actions bar */
-  .actions { margin: .5rem 0 1rem; }
-  .actions form { display: inline; margin-right: .5rem; }
-  .actions button { width: auto; }
+  .info    { background: #eff6ff; color: #1e40af; }
+
+  /* Top nav as buttons */
+  .nav { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-bottom: 1rem; }
+  .nav form { display: inline; margin: 0; }
+  .nav button { width: auto; }
 </style>
 """
 
 NAV = """
-<div class=\"nav\">
-  <a href=\"{{ url_for('entry') }}\">Data Entry</a>
-  <a href=\"{{ url_for('encrypted') }}\">Encrypted View</a>
-  <a href=\"{{ url_for('cleartext') }}\">Cleartext View</a>
-  <a href=\"{{ url_for('cleartext_batch') }}\">Cleartext (Batch)</a>
-  <form action=\"{{ url_for('rewrap') }}\" method=\"post\"><button type=\"submit\">Re-wrap (single)</button></form>
-  <form action=\"{{ url_for('rewrap_batch') }}\" method=\"post\"><button type=\"submit\">Re-wrap (batch API)</button></form>
-  <form action=\"{{ url_for('rotate_key') }}\" method=\"post\"><button type=\"submit\">Rotate Key</button></form>
-  <a href=\"{{ url_for('logout') }}\">Logout ({{ session.get('user') }})</a>
+<div class="nav">
+  <form method="get" action="{{ url_for('entry') }}"><button type="submit">Data Entry</button></form>
+  <form method="get" action="{{ url_for('encrypted') }}"><button type="submit">Encrypted View</button></form>
+  <form method="get" action="{{ url_for('cleartext') }}"><button type="submit">Cleartext View</button></form>
+  <form method="get" action="{{ url_for('cleartext_batch') }}"><button type="submit">Cleartext (Batch)</button></form>
+  <form method="post" action="{{ url_for('rewrap') }}"><button type="submit">Re-wrap (single)</button></form>
+  <form method="post" action="{{ url_for('rewrap_batch') }}"><button type="submit">Re-wrap (batch API)</button></form>
+  <form method="post" action="{{ url_for('rotate_key') }}"><button type="submit">Rotate Key</button></form>
+  <form method="get" action="{{ url_for('logout') }}"><button type="submit">Logout ({{ session.get('user') }})</button></form>
 </div>
 """
 
@@ -609,3 +605,4 @@ if __name__ == "__main__":
     with app.app_context():
         init_db()
     app.run(host="0.0.0.0", port=5001, debug=True)
+
