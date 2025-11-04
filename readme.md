@@ -69,7 +69,6 @@ transit/decrypt/<key>
 transit/rewrap/<key>
 transit/keys/<key>/rotate
 ```
-
 ## ⚠️ Security Notes
 - For demo purposes only – do **not** use in production as-is.
 - Replace basic auth with proper **OIDC/SAML** or Vault auth methods (AppRole, Kubernetes, etc.)
